@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.DataBaseClientController">
+   <children>
+      <ImageView fitHeight="752.0" fitWidth="750.0" layoutX="-2.0" layoutY="-4.0" pickOnBounds="true">
+         <image>
+            <Image url="@../image/osago.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="752.0" fitWidth="537.0" layoutX="745.0" layoutY="-4.0" pickOnBounds="true">
+         <image>
+            <Image url="@../image/docauto.jpeg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tableViewClients" editable="true" layoutX="27.0" layoutY="69.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="1231.0" style="-fx-background-radius: 30;" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="69.0">
+        <columns>
+          <TableColumn fx:id="tableColumnId" prefWidth="41.0" text="id" />
+          <TableColumn fx:id="tableColumnFIO" prefWidth="198.0" text="Ф.И.О" />
+            <TableColumn fx:id="tableColumnDateBirth" prefWidth="121.0" text="Дата Рождения" />
+            <TableColumn fx:id="tableColumnNumberPrav" prefWidth="186.0" text="№ Вод.удостоверения" />
+            <TableColumn fx:id="tableColumnAutoSkill" prefWidth="128.0" text="Опыт вождения" />
+            <TableColumn fx:id="tableColumnGender" prefWidth="55.0" text="Пол" />
+            <TableColumn fx:id="tableColumnAdrress" prefWidth="162.0" text="Адрес" />
+            <TableColumn fx:id="tableColumnCallNumber" minWidth="0.0" prefWidth="155.0" text="Телефон" />
+            <TableColumn fx:id="tableColumnCity" prefWidth="184.0" text="Город" />
+        </columns>
+      </TableView>
+      <ButtonBar layoutX="468.0" layoutY="631.0" opacity="0.73" prefHeight="40.0" prefWidth="366.0">
+        <buttons>
+            <Button fx:id="buttonRefrashTableClients" mnemonicParsing="false" onAction="#buttonRefrashTableClientsOnAction" style="-fx-background-radius: 10;" text="Загрузить" />
+            <Button fx:id="buttonDeleteTableClients" mnemonicParsing="false" onAction="#buttonDeleteTableClientsOnAction" style="-fx-background-radius: 10;" text="Удалить" />
+            <Button fx:id="buttonEditClients" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#buttonEditClientsOnAction" style="-fx-background-radius: 10;" text="Редактировать" />
+        </buttons>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets right="25.0" />
+         </padding>
+      </ButtonBar>
+   </children>
+</AnchorPane>

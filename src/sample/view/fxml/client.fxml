@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="599.0" style="-fx-background-color: rgb(59, 89, 152);" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.ClientController">
+   <children>
+      <TabPane layoutX="-1.0" layoutY="117.0" prefHeight="483.0" prefWidth="599.0" style="-fx-background-color: #f7f7f7; -fx-background-radius: 10;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="117.0">
+        <tabs>
+          <Tab text="Страхователь">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="55.0" layoutY="39.0" prefHeight="150.0" prefWidth="482.0">
+                           <children>
+                              <VBox prefHeight="150.0" prefWidth="227.0" spacing="10.0">
+                                 <children>
+                                    <Label contentDisplay="CENTER" prefHeight="25.0" prefWidth="96.0" text="Ф.И.О :">
+                                       <VBox.margin>
+                                          <Insets left="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label prefHeight="25.0" prefWidth="96.0" text="Адрес :">
+                                       <VBox.margin>
+                                          <Insets left="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label prefHeight="25.0" prefWidth="96.0" text="Город :">
+                                       <VBox.margin>
+                                          <Insets left="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="96.0" text="Телефон :">
+                                       <VBox.margin>
+                                          <Insets left="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox prefHeight="150.0" prefWidth="384.0" spacing="10.0">
+                                 <children>
+                                    <TextField fx:id="textFieldFIO" alignment="CENTER" onKeyTyped="#onKeyTypedFio" prefHeight="25.0" prefWidth="96.0" promptText="Фамилия Имя Отчество" />
+                                    <TextField fx:id="textFieldAddress" alignment="CENTER" onKeyTyped="#onKeyTypedAddress" promptText="Фактический адрес проживания" />
+                                    <TextField fx:id="textFieldCity" alignment="CENTER" onKeyTyped="#onKeyTypedCity" promptText="Область/Республика,Город" />
+                                    <TextField fx:id="textFieldPhoneNumber" alignment="CENTER" onKeyTyped="#onKeyTypedPhone" promptText="Мобильный/Городской" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <Separator layoutX="19.0" layoutY="28.0" prefHeight="2.0" prefWidth="512.0" />
+                        <Label layoutX="20.0" layoutY="4.0" text="Контактная информация">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="19.0" layoutY="211.0" text="Персональная информация">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="19.0" layoutY="239.0" prefHeight="0.0" prefWidth="514.0" />
+                        <Separator layoutX="19.0" layoutY="197.0" prefHeight="3.0" prefWidth="513.0" />
+                        <HBox layoutX="61.0" layoutY="252.0" prefHeight="150.0" prefWidth="475.0">
+                           <children>
+                              <VBox prefHeight="150.0" prefWidth="227.0" spacing="10.0">
+                                 <children>
+                                    <Label alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="173.0" text="Дата Рождения :" />
+                                    <Label alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="155.0" text="Номер вод. удостоверения:" />
+                                    <Label alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="167.0" text="Стаж :" />
+                                    <Label alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="170.0" text="Пол:" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox prefHeight="148.0" prefWidth="320.0" spacing="10.0">
+                                 <children>
+                                    <DatePicker fx:id="textFieldBirthDate" prefHeight="25.0" prefWidth="185.0" promptText="гг/мм/дд" showWeekNumbers="true" />
+                                    <TextField fx:id="textFieldNumberPrava" alignment="CENTER" onKeyTyped="#onKeyTypedNumberPrava" promptText="74 АА N 397530" />
+                                    <TextField fx:id="textFieldAutoSkill" alignment="CENTER" onKeyTyped="#onKeyTypedAutoSkill" prefHeight="25.0" prefWidth="266.0" promptText="Водительский стаж" />
+                                    <Pane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <RadioButton fx:id="radioButtonMale" layoutX="24.0" layoutY="4.0" mnemonicParsing="false" text="Муж">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="gender" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="radioButtonFemale" layoutX="166.0" layoutY="4.0" mnemonicParsing="false" selected="true" text="Жен" toggleGroup="$gender" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <Button fx:id="buttonAddClient" layoutX="456.0" layoutY="415.0" mnemonicParsing="false" onAction="#buttonAddClientOnAction" prefHeight="25.0" prefWidth="114.0" style="-fx-background-radius: 10;" text="Добавить" />
+                        <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="19.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/Fio_icon.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="24.0" fitWidth="36.0" layoutX="20.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/addres_icon.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="25.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/phone_icon.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="24.0" fitWidth="25.0" layoutX="20.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/city_icon.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="24.0" fitWidth="28.0" layoutX="27.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/bithday_icon.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="26.0" fitWidth="31.0" layoutX="26.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/vod_prava_icon.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="22.0" fitWidth="26.0" layoutX="28.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/auto_skill_icon.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="26.0" fitWidth="28.0" layoutX="30.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/gender_icon.png" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="buttonDataBaseClient" layoutX="19.0" layoutY="415.0" mnemonicParsing="false" onAction="#buttonDataBaseClientOnAction" style="-fx-background-radius: 10;" text="База данных" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Автомобиль">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="4.0" prefHeight="20.0" prefWidth="128.0" text="Основные данные">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="14.0" layoutY="30.0" prefHeight="0.0" prefWidth="533.0" />
+                        <HBox layoutX="42.0" layoutY="48.0" prefHeight="312.0" prefWidth="500.0" spacing="10.0">
+                           <children>
+                              <VBox prefHeight="151.0" prefWidth="305.0" spacing="10.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="251.0" text="Марка :" />
+                                    <Label prefHeight="25.0" prefWidth="268.0" text="Модель :" />
+                                    <Label prefHeight="25.0" prefWidth="261.0" text="Цвет :" />
+                                    <Label prefHeight="25.0" prefWidth="258.0" text="Мощность двигателя, л.с :" />
+                                    <Label prefHeight="25.0" prefWidth="244.0" text="Объем двигателя, куб.см :" />
+                                    <Label prefHeight="25.0" prefWidth="250.0" text="Гос.номер :" />
+                                    <Label prefHeight="25.0" prefWidth="251.0" text="Максимальная скорость, км/ч :" />
+                                    <Label prefHeight="25.0" prefWidth="232.0" text="Тип привода :" />
+                                    <Label prefHeight="25.0" prefWidth="262.0" text="Тип кузова :" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox prefHeight="151.0" prefWidth="346.0" spacing="10.0">
+                                 <children>
+                                    <TextField fx:id="textFieldMarkaAuto" onKeyTyped="#onKeyTypedMarkaAuto" promptText="Лада" />
+                                    <TextField fx:id="textFieldModelAuto" onKeyTyped="#onKeyTypedModelAuto" promptText="Приора" />
+                                    <TextField fx:id="textFieldColorAuto" onKeyTyped="#onKeyTypedColorAuto" promptText="Баклажан" />
+                                    <TextField fx:id="textFieldPowerAuto" onKeyTyped="#onKeyTypedPowerAuto" promptText="120" />
+                                    <TextField fx:id="textFieldVolumeEngine" onKeyTyped="#onKeyTypedVolumeEngine" promptText="1,6" />
+                                    <TextField fx:id="textFieldGosNumber" onKeyTyped="#onKeyTypedGosNumber" promptText="Е 777 КХ 777 rus" />
+                                    <TextField fx:id="textFieldMaxSpeed" onKeyTyped="#onKeyTypedMaxSpeed" promptText="220" />
+                                    <ComboBox fx:id="comboBoxTypeDrive" editable="true" prefWidth="150.0" />
+                                    <ComboBox fx:id="comboBoxTypeBody" editable="true" prefWidth="150.0" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="17.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-тесла-модель-3-50.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="17.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-пробка-64.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="17.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-цвет-заливки-50.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="17.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-ламборгини-filled-50.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="17.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-двигатель-50.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="17.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-скорость-50.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="17.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-7-50.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="17.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-автомобиль-2x6-24.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="17.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-двери-автомобиля-80.png" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="buttonAddAuto" layoutX="355.0" layoutY="409.0" mnemonicParsing="false" onAction="#buttonAddAutoOnAction" prefHeight="25.0" prefWidth="96.0" style="-fx-background-radius: 10;" text="Добавить" />
+                        <Button fx:id="buttonDataBaseAuto" layoutX="16.0" layoutY="409.0" mnemonicParsing="false" onAction="#buttonDataBaseAutoOnAction" style="-fx-background-radius: 10;" text="База данных" />
+                        <Button fx:id="buttonPolis" layoutX="481.0" layoutY="409.0" mnemonicParsing="false" onAction="#buttonPolisOnAction" prefHeight="25.0" prefWidth="96.0" style="-fx-background-radius: 10;" text="Полис" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TabPane>
+      <ImageView fitHeight="158.0" fitWidth="244.0" layoutX="7.0" layoutY="-21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/Logo_home.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="96.0" fitWidth="170.0" layoutX="478.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/coat-of-arms-of-russia.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
