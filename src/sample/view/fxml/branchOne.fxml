@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="1300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.BranchOneController">
+    <children>
+        <ButtonBar layoutX="464.0" layoutY="593.0" prefHeight="40.0" prefWidth="604.0" style="-fx-background-radius: 10; -fx-background-color: white;">
+            <buttons>
+                <Button fx:id="buttonLoadDogovor" mnemonicParsing="false" onAction="#buttonLoadDogovorOnAction" style="-fx-background-radius: 10;" text="Загрузить" />
+                <Button fx:id="buttonDeleteDogovor" mnemonicParsing="false" onAction="#buttonDeleteDogovorOnAction" style="-fx-background-radius: 10;" text="Удалить" />
+                <Button fx:id="buttonEditDogovor" layoutX="50.0" layoutY="18.0" mnemonicParsing="false" onAction="#buttonEditDogovorOnAction" style="-fx-background-radius: 10;" text="Редактировать" />
+              <Button fx:id="buttonOtchet" mnemonicParsing="false" onAction="#buttonOtchetOnAction" style="-fx-background-radius: 15;" text="Сформировать отчет" />
+            </buttons>
+            <padding>
+                <Insets right="15.0" />
+            </padding>
+        </ButtonBar>
+        <TableView fx:id="tableViewDogovor" editable="true" layoutY="46.0" prefHeight="515.0" prefWidth="1300.0" AnchorPane.bottomAnchor="185.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
+            <columns>
+                <TableColumn fx:id="id_dogovor" prefWidth="52.0" text="id" visible="false" />
+                <TableColumn fx:id="daye_issue" prefWidth="135.0" text="Дата заключения" />
+                <TableColumn fx:id="date_break" minWidth="0.0" prefWidth="127.0" text="Дата расторжения" />
+                <TableColumn fx:id="fio_agent" prefWidth="219.0" text="Агент" />
+                <TableColumn fx:id="fio_client" prefWidth="189.0" text="Страхователь" />
+                <TableColumn fx:id="type_insurance" prefWidth="129.0" text="Вид страховки" />
+                <TableColumn fx:id="payment" prefWidth="158.0" text="Стоимость страховки,&#10;                   руб.&#10;" />
+                <TableColumn fx:id="auto" maxWidth="445.0" minWidth="-1.0" prefWidth="138.0" text="Автомобиль" />
+                <TableColumn fx:id="pay" prefWidth="152.0" text="Страховая выплата,&#10;              руб.&#10;" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

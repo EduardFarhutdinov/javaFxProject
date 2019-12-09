@@ -115,4 +115,20 @@ public class Auto {
     public void setBody(String body) {
         this.body = body;
     }
+
+    @Override
+    public String toString() {
+        return "Auto{" +
+                "id=" + id +
+                ", marka='" + marka + '\'' +
+                ", model='" + model + '\'' +
+                ", color='" + color + '\'' +
+                ", power='" + power + '\'' +
+                ", volume='" + volume + '\'' +
+                ", number='" + number + '\'' +
+                ", speed='" + speed + '\'' +
+                ", drive='" + drive + '\'' +
+                ", body='" + body + '\'' +
+                '}';
+    }
 }

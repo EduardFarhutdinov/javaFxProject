@@ -162,6 +162,7 @@ public class DataBaseClientController {
                         "Успешно!", "Клиент удален.");
                 buttonRefrashTableClientsOnAction();
             } catch (SQLException e) {
+                System.out.println(e);
                 Alarm.showAlert(Alert.AlertType.INFORMATION, "Удаление",
                         "Ошибка!", "Подробности:" + e + ".");
 //              e.printStackTrace();

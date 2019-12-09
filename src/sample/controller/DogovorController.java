@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.w3c.dom.ls.LSOutput;
 import sample.model.Dogovor1;
 import sample.util.Alarm;
 import sample.util.DbConnection;
@@ -61,6 +62,8 @@ public class DogovorController {
     private Button buttonLoadDogovor;
     @FXML
     private Button buttonEditDogovor;
+    @FXML
+    private Button buttonOtchet;
 
     @FXML
     private Button buttonDeleteDogovor;
@@ -92,24 +95,44 @@ public class DogovorController {
 
     }
 
+
+    @FXML
+    public void buttonOtchetOnAction(ActionEvent event) {
+        String query = "select sum(insurance_payment) from main_office.public.dogovor where branch='H'";
+        int sum= 0;
+        try (Connection connection = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.DB_USER, DbConnection.DB_PASS);
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                sum = resultSet.getInt(1);
+            }
+            Alarm.showAlert(Alert.AlertType.INFORMATION, "Отчет",
+                    "Главный офис", "Сумма составляет: " + sum + "руб.");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+
     @FXML
     void buttonDeleteDogovorOnAction(ActionEvent event) {
-        if(tableViewDogovor.getSelectionModel().isEmpty()){
+        if (tableViewDogovor.getSelectionModel().isEmpty()) {
             Alarm.showAlert(Alert.AlertType.ERROR, "Удаление",
                     "Ошибка!", "Выберите договор.");
-        }else {
-            try(Connection connection = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.DB_USER, DbConnection.DB_PASS) ;
-                PreparedStatement preparedStatement = connection.prepareStatement("DELETE from dogovor where id_договора = ?")) {
+        } else {
+            try (Connection connection = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.DB_USER, DbConnection.DB_PASS);
+                 PreparedStatement preparedStatement = connection.prepareStatement("DELETE from dogovor where id_договора = ?")) {
                 int client = tableViewDogovor.getSelectionModel().getSelectedItem().getId();
-                preparedStatement.setInt(1,client);
+                preparedStatement.setInt(1, client);
                 preparedStatement.executeUpdate();
 
                 Alarm.showAlert(Alert.AlertType.INFORMATION, "Удаление",
-                        "Успешно!","Договор рассторгнут.");
+                        "Успешно!", "Договор рассторгнут.");
 
 
                 buttonLoadDogovorOnAction();
-            } catch ( SQLException e) {
+            } catch (SQLException e) {
                 Alarm.showAlert(Alert.AlertType.ERROR, "Удаление",
                         "Ошибка!", "Подробности:" + e + ".");
 //              e.printStackTrace();
@@ -121,6 +144,7 @@ public class DogovorController {
     void buttonEditDogovorOnAction(ActionEvent event) {
 
     }
+
     @FXML
     void buttonLoadDogovorOnAction() {
         tableViewDogovor.getItems().clear();
@@ -133,20 +157,20 @@ public class DogovorController {
                 "insurance_payment," +
                 "id_auto," +
                 "pay" +
-                " from dogovor";
+                " from main_office.public.dogovor where branch='H'";
 
 
         int id_agent = 0;
-        String fioAgnt= "";
+        String fioAgnt = "";
 
         int id_client = 0;
-        String fioClient ="";
+        String fioClient = "";
 
         int id_auto = 0;
         String markaAuto = "";
 
-        try (Connection connection = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.DB_USER, DbConnection.DB_PASS) ;
-             PreparedStatement preparedStatement = connection.prepareStatement(query) ;
+        try (Connection connection = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.DB_USER, DbConnection.DB_PASS);
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
         ) {
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -154,19 +178,19 @@ public class DogovorController {
             while (resultSet.next()) {
                 id_agent = resultSet.getInt("id_agent");
                 ResultSet rs = resultSet(id_agent);
-                if (rs.next()){
+                if (rs.next()) {
                     fioAgnt = rs.getString("fio_agent");
                 }
 
                 id_client = resultSet.getInt("id_client");
                 ResultSet rs1 = resultSet1(id_client);
-                if (rs1.next()){
+                if (rs1.next()) {
                     fioClient = rs1.getString("fio_client");
                 }
 
                 id_auto = resultSet.getInt("id_auto");
                 ResultSet rs2 = resultSet2(id_auto);
-                if (rs2.next()){
+                if (rs2.next()) {
                     markaAuto = rs2.getString("marka");
                 }
                 dogovors.add(new Dogovor1(
@@ -176,9 +200,9 @@ public class DogovorController {
                         fioAgnt,
                         fioClient,
                         resultSet.getString("insurance_type"),
-                        resultSet.getString("insurance_payment"),
+                        resultSet.getInt("insurance_payment"),
                         markaAuto,
-                        resultSet.getString("pay")
+                        resultSet.getInt("pay")
                 ));
                 tableViewDogovor.setItems(dogovors);
             }
@@ -186,53 +210,52 @@ public class DogovorController {
             resultSet.close();
 
 
-
-
-
-        } catch ( SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public ResultSet resultSet(int id){
-        ResultSet resultSet1 =null;
+
+    public ResultSet resultSet(int id) {
+        ResultSet resultSet1 = null;
         String query1 = "SELECT fio_agent from agent where id_agent = ?";
-        try{
+        try {
             Connection connection = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.DB_USER, DbConnection.DB_PASS);
             PreparedStatement preparedStatement = connection.prepareStatement(query1);
-            preparedStatement.setInt(1,id);
-            resultSet1= preparedStatement.executeQuery();
-        }catch ( SQLException e) {
+            preparedStatement.setInt(1, id);
+            resultSet1 = preparedStatement.executeQuery();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return resultSet1;
     }
 
-    public ResultSet resultSet1(int id){
-        ResultSet resultSet1 =null;
+    public ResultSet resultSet1(int id) {
+        ResultSet resultSet1 = null;
         String query1 = "SELECT fio_client from client where id_client = ?";
-        try{
+        try {
             Connection connection = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.DB_USER, DbConnection.DB_PASS);
             PreparedStatement preparedStatement = connection.prepareStatement(query1);
-            preparedStatement.setInt(1,id);
-            resultSet1= preparedStatement.executeQuery();
-        }catch ( SQLException e) {
+            preparedStatement.setInt(1, id);
+            resultSet1 = preparedStatement.executeQuery();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return resultSet1;
     }
 
-    public ResultSet resultSet2(int id){
-        ResultSet resultSet1 =null;
+    public ResultSet resultSet2(int id) {
+        ResultSet resultSet1 = null;
         String query1 = "SELECT marka from auto where id_авто = ?";
-        try{
+        try {
             Connection connection = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.DB_USER, DbConnection.DB_PASS);
             PreparedStatement preparedStatement = connection.prepareStatement(query1);
-            preparedStatement.setInt(1,id);
-            resultSet1= preparedStatement.executeQuery();
-        }catch ( SQLException e) {
+            preparedStatement.setInt(1, id);
+            resultSet1 = preparedStatement.executeQuery();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return resultSet1;
     }
+
 }
 

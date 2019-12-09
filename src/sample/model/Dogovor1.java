@@ -7,12 +7,16 @@ public class Dogovor1 {
     private String id_agent;
     private String id_client;
     private String type_insurance;
-    private String insurance_payment;
+    private Integer insurance_payment;
+    private String branch;
+    private String id_auto;
+    private Integer pay;
+
 
     public Dogovor1() {
     }
 
-    public Dogovor1(int id, String date_issue, String date_brake, String id_agent, String id_client, String type_insurance, String insurance_payment, String id_auto, String pay) {
+    public Dogovor1(int id, String date_issue, String date_brake, String id_agent, String id_client, String type_insurance, Integer insurance_payment, String id_auto, Integer pay) {
         this.id = id;
         this.date_issue = date_issue;
         this.date_brake = date_brake;
@@ -22,6 +26,7 @@ public class Dogovor1 {
         this.insurance_payment = insurance_payment;
         this.id_auto = id_auto;
         this.pay = pay;
+        branch = "H";
     }
 
     public int getId() {
@@ -72,11 +77,11 @@ public class Dogovor1 {
         this.type_insurance = type_insurance;
     }
 
-    public String getInsurance_payment() {
+    public Integer getInsurance_payment() {
         return insurance_payment;
     }
 
-    public void setInsurance_payment(String insurance_payment) {
+    public void setInsurance_payment(Integer insurance_payment) {
         this.insurance_payment = insurance_payment;
     }
 
@@ -88,14 +93,11 @@ public class Dogovor1 {
         this.id_auto = id_auto;
     }
 
-    public String getPay() {
+    public Integer getPay() {
         return pay;
     }
 
-    public void setPay(String pay) {
+    public void setPay(Integer pay) {
         this.pay = pay;
     }
-
-    private String id_auto;
-    private String pay;
 }

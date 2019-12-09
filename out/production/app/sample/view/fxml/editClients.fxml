@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="599.0" style="-fx-background-color: rgb(59, 89, 152);" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.EditClientController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="599.0" style="-fx-background-color: rgb(59, 89, 152);" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.EditClientController">
    <children>
       <TabPane layoutX="-1.0" layoutY="117.0" prefHeight="483.0" prefWidth="599.0" style="-fx-background-color: #f7f7f7; -fx-background-radius: 10;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="117.0">
         <tabs>
@@ -122,7 +110,7 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <Button fx:id="buttonEditClient" layoutX="456.0" layoutY="415.0" mnemonicParsing="false" onAction="#buttonEditOnAction" prefHeight="25.0" prefWidth="114.0" style="-fx-background-radius: 10;" text="Редактировать" />
+                        <Button fx:id="buttonEditClient" layoutX="456.0" layoutY="415.0" mnemonicParsing="false" onAction="#buttonEditOnAction" prefHeight="25.0" prefWidth="114.0" style="-fx-background-radius: 10;" text="Ок" />
                         <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="19.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/Fio_icon.png" />

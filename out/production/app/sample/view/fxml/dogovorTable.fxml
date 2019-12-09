@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.DogovorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.DogovorController">
    <children>
       <ButtonBar layoutX="464.0" layoutY="593.0" prefHeight="40.0" prefWidth="351.0" style="-fx-background-radius: 10; -fx-background-color: white;">
         <buttons>
@@ -21,7 +18,7 @@
       </ButtonBar>
       <TableView fx:id="tableViewDogovor" layoutY="46.0" prefHeight="515.0" prefWidth="1300.0" AnchorPane.bottomAnchor="185.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
         <columns>
-          <TableColumn fx:id="id_dogovor" prefWidth="52.0" text="id" />
+          <TableColumn fx:id="id_dogovor" prefWidth="52.0" text="id" visible="false" />
             <TableColumn fx:id="daye_issue" prefWidth="135.0" text="Дата заключения" />
             <TableColumn fx:id="date_break" minWidth="0.0" prefWidth="127.0" text="Дата расторжения" />
             <TableColumn fx:id="fio_agent" prefWidth="219.0" text="Агент" />
@@ -32,5 +29,6 @@
             <TableColumn fx:id="pay" prefWidth="152.0" text="Страховая выплата,&#10;              руб.&#10;" />
         </columns>
       </TableView>
+      <Button fx:id="buttonOtchet" layoutX="1120.0" layoutY="600.0" mnemonicParsing="false" onAction="#buttonOtchetOnAction" text="Сформировать отчет" />
    </children>
 </AnchorPane>

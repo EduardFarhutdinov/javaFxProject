@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.PolisController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.PolisController">
     <children>
+        <VBox layoutX="68.0" layoutY="76.0" prefHeight="364.0" prefWidth="136.0" spacing="20.0">
+            <children>
+                <Label prefHeight="25.0" prefWidth="95.0" text="Страхователь :" />
+                <Label prefHeight="25.0" prefWidth="117.0" text="Тип страхования : " />
+                <Label prefHeight="25.0" prefWidth="95.0" text="Агент :" />
+                <Label prefHeight="25.0" prefWidth="95.0" text="Автомобиль :" />
+                <Label prefHeight="25.0" prefWidth="117.0" text="Страховой платёж :" />
+                <Label prefHeight="25.0" prefWidth="117.0" text="Страховая выплата :" />
+                <Label prefHeight="25.0" prefWidth="117.0" text="Дата заключения :" />
+                <Label prefHeight="25.0" prefWidth="117.0" text="Дата расторжения :" />
+            </children>
+        </VBox>
         <TableView fx:id="tableViewAutoPolis" layoutX="774.0" layoutY="6.0" prefHeight="267.0" prefWidth="512.0" AnchorPane.bottomAnchor="454.0" AnchorPane.leftAnchor="774.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="25.0">
             <columns>
                 <TableColumn fx:id="tableColumnIdAuto" prefWidth="41.0" text="id" />
@@ -35,83 +38,67 @@
             </columns>
         </TableView>
         <Button fx:id="buttonAddPolis" layoutX="31.0" layoutY="694.0" mnemonicParsing="false" onAction="#buttonAddPolisOnAction" text="Оформить" />
-      <Button fx:id="buttonRefrashAutoTable" layoutX="774.0" layoutY="306.0" mnemonicParsing="false" onAction="#buttonRefrashAutoTableOnAction" text="Загрузить" />
-      <Button fx:id="buttonRefrashClientTable" layoutX="774.0" layoutY="643.0" mnemonicParsing="false" onAction="#buttonRefrashClientTableOnAction" text="Загрузить" />
-      <Label alignment="CENTER" layoutX="193.0" layoutY="14.0" prefHeight="43.0" prefWidth="435.0" text="Полис">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Label>
-      <HBox layoutX="68.0" layoutY="80.0" prefHeight="360.0" prefWidth="492.0">
-         <children>
-            <VBox prefHeight="586.0" prefWidth="318.0" spacing="20.0">
-               <children>
-                  <Label prefHeight="25.0" prefWidth="95.0" text="Страхователь :" />
-                  <Label prefHeight="25.0" prefWidth="117.0" text="Тип страхования : " />
-                  <Label prefHeight="25.0" prefWidth="95.0" text="Агент :" />
-                  <Label prefHeight="25.0" prefWidth="95.0" text="Автомобиль :" />
-                  <Label prefHeight="25.0" prefWidth="117.0" text="Страховой платёж :" />
-                  <Label prefHeight="25.0" prefWidth="117.0" text="Страховая выплата :" />
-                  <Label prefHeight="25.0" prefWidth="117.0" text="Дата заключения :" />
-                  <Label prefHeight="25.0" prefWidth="117.0" text="Дата расторжения :" />
-               </children>
-            </VBox>
-            <VBox prefHeight="586.0" prefWidth="320.0" spacing="20.0">
-               <children>
-                  <TextField fx:id="textfieldIdClient" />
-                  <ComboBox fx:id="comboBoxTypeInsurance" prefHeight="25.0" prefWidth="249.0" />
-                  <TextField fx:id="textfieldIdAgent" />
-                  <TextField fx:id="textfieldIdAuto" />
-                  <TextField fx:id="textfieldInsurancePayment" />
-                  <TextField fx:id="textfieldPay" />
-                  <DatePicker fx:id="textFiledDateIssue" prefHeight="25.0" prefWidth="247.0" />
-                  <DatePicker fx:id="textxFiledDateBreakUp" prefHeight="25.0" prefWidth="253.0" />
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="15.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/icons8-водитель-50.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="43.0" fitWidth="32.0" layoutX="15.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/icons8-страховка-автомобиля-50.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="32.0" layoutX="15.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="15.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/icons8-администратор-50.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="32.0" fitWidth="41.0" layoutX="15.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/icons8-автомобиль-48.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="15.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/icons8-деньги-в-руке-50.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="15.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/icons8-деньги-в-руке-64.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="15.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/icons8-cегодня-50.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="15.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/icons8-оставлять-50.png" />
-         </image>
-      </ImageView>
-      <TextField fx:id="textFieldFilterAuto" layoutX="973.0" layoutY="306.0" />
-      <Button fx:id="buttonDataBasePolis" layoutX="132.0" layoutY="694.0" mnemonicParsing="false" onAction="#buttonDataBasePolisOnAction" text="База полисов" />
+        <Label alignment="CENTER" layoutX="193.0" layoutY="14.0" prefHeight="43.0" prefWidth="435.0" text="Полис">
+            <font>
+                <Font size="29.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="15.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/icons8-водитель-50.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="43.0" fitWidth="32.0" layoutX="15.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/icons8-страховка-автомобиля-50.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="25.0" fitWidth="32.0" layoutX="15.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="15.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/icons8-администратор-50.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="32.0" fitWidth="41.0" layoutX="15.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/icons8-автомобиль-48.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="15.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/icons8-деньги-в-руке-50.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="15.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/icons8-деньги-в-руке-64.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="15.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/icons8-cегодня-50.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="15.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/icons8-оставлять-50.png" />
+            </image>
+        </ImageView>
+        <TextField fx:id="textFieldFilterAuto" layoutX="864.0" layoutY="306.0" prefHeight="26.0" prefWidth="289.0" />
+        <Button fx:id="buttonDataBasePolis" layoutX="132.0" layoutY="694.0" mnemonicParsing="false" onAction="#buttonDataBasePolisOnAction" text="База полисов" />
+        <Label layoutX="774.0" layoutY="305.0" prefHeight="26.0" prefWidth="74.0" text="Поиск авто" />
+        <Label layoutX="774.0" layoutY="634.0" prefHeight="26.0" prefWidth="90.0" text="Поиск клиента" />
+        <TextField fx:id="textFieldFilterClient" layoutX="871.0" layoutY="634.0" prefHeight="26.0" prefWidth="289.0" />
+        <Button fx:id="buttonSetValuesFields" layoutX="1226.0" layoutY="634.0" mnemonicParsing="false" onAction="#buttonSetValuesFieldsOnAction" text="Внести" />
+        <TextField fx:id="textfieldIdClient" layoutX="242.0" layoutY="76.0" prefHeight="26.0" prefWidth="299.0" />
+        <ComboBox fx:id="comboBoxTypeInsurance" layoutX="244.0" layoutY="123.0" prefHeight="25.0" prefWidth="249.0" />
+        <TextField fx:id="textfieldIdAgent" layoutX="242.0" layoutY="165.0" prefHeight="26.0" prefWidth="299.0" />
+        <TextField fx:id="textfieldAutoModel" layoutX="347.0" layoutY="216.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="86.0" />
+        <TextField fx:id="textfieldAutoMarka" layoutX="242.0" layoutY="216.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="86.0" />
+        <TextField fx:id="textfieldAutoNumber" layoutX="454.0" layoutY="216.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="86.0" />
+        <TextField fx:id="textfieldInsurancePayment" layoutX="242.0" layoutY="261.0" prefHeight="26.0" prefWidth="299.0" />
+        <TextField fx:id="textfieldPay" layoutX="242.0" layoutY="305.0" prefHeight="26.0" prefWidth="299.0" />
+        <DatePicker fx:id="textFiledDateIssue" layoutX="240.0" layoutY="352.0" prefHeight="26.0" prefWidth="299.0" />
+        <DatePicker fx:id="textFiledDateBreakUp" layoutX="240.0" layoutY="398.0" prefHeight="26.0" prefWidth="299.0" />
     </children>
 </AnchorPane>

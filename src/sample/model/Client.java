@@ -109,4 +109,19 @@ public class Client {
     public void setCity(String city) {
         this.city = city;
     }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id_clienta=" + id_clienta +
+                ", fio_clienta='" + fio_clienta + '\'' +
+                ", birth_date='" + birth_date + '\'' +
+                ", number_prav='" + number_prav + '\'' +
+                ", auto_skill='" + auto_skill + '\'' +
+                ", gender='" + gender + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
 }

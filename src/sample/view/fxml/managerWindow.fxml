@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="585.0" prefWidth="424.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.ManagerMenuController">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="136.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/manager.jpg" />
+         </image>
+      </ImageView>
+      <VBox layoutX="136.0" layoutY="266.0" prefHeight="133.0" prefWidth="145.0" spacing="10.0" style="-fx-background-radius: 15;">
+         <children>
+            <Button fx:id="buttonRedirectApp" mnemonicParsing="false" onAction="#buttonRedirectAppOnAction" prefHeight="26.0" prefWidth="117.0" style="-fx-background-radius: 15;" text="Приложение" />
+            <Button fx:id="buttonForMainOffice" mnemonicParsing="false" onAction="#buttonForMainOfficeOnAction" prefHeight="30.0" prefWidth="118.0" style="-fx-background-radius: 15;" text="Главный офис" />
+            <Button fx:id="buttonForBranchOneOffice" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#buttonForBranchOneOfficeOnAction" prefHeight="31.0" prefWidth="116.0" style="-fx-background-radius: 15;" text="Филиал 1" />
+            <Button fx:id="buttonForBranchTwoOffice" layoutX="10.0" layoutY="41.0" mnemonicParsing="false" onAction="#buttonForBranchTwoOfficeOnAction" prefHeight="31.0" prefWidth="116.0" style="-fx-background-radius: 15;" text="Филиал 2" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

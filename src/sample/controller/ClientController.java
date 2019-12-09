@@ -208,6 +208,7 @@ public class ClientController {
             Alarm.showAlert(Alert.AlertType.INFORMATION, "Оформление",
                     "Успешно!", "Автомобиль добавлен.");
         } catch (SQLException eq) {
+            System.out.println(eq);
             Alarm.showAlert(Alert.AlertType.ERROR, "Оформление",
                     "Ошибка!", "Подробности: " + eq + ".");
         }
@@ -325,6 +326,7 @@ public class ClientController {
             Alarm.showAlert(Alert.AlertType.INFORMATION, "Оформление",
                     "Успешно!","Клиент добавлен.");
         } catch (SQLException eq) {
+            System.out.println(eq);
             Alarm.showAlert(Alert.AlertType.WARNING, "Оформление",
                     "Ошибка!", "Подробности: " + eq + ".");
         }

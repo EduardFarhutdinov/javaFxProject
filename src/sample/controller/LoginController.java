@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.InputMethodEvent;
 import javafx.stage.Stage;
+import sample.model.Agent;
 import sample.util.Alarm;
 
 import java.io.IOException;
@@ -44,15 +45,15 @@ public class LoginController implements Initializable {
     private PasswordField passwordField;
 
     @FXML
-    private CheckBox checkBoxShowPassword;
+    private CheckBox checkBoxSuperUser;
 
+   static Agent agent;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         buttonEnterLogin.disableProperty().bind(loginField.textProperty().isEmpty().or(passwordField.textProperty().isEmpty()));
     }
-
 
     @FXML
     private void buttonSetOnActionLogin(ActionEvent event) {
@@ -62,25 +63,35 @@ public class LoginController implements Initializable {
                     "Ошибка!", "Пожалуйста, заполните поля.");
         } else {
             try {
-                String query = "select * from agent where login = ? and password = ?";//SQl запрос для проверки логина и пароля
+                String query = "select * from agent where login = ? and password = ? and access = ?";//SQl запрос для проверки логина и пароля
                 Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);//Создание соединения с БД
 
                 PreparedStatement preparedStatement = connection.prepareStatement(query);//Выполнение запроса
 
-                connection.setAutoCommit(false);
+//                connection.setAutoCommit(false);
 
 
                 preparedStatement.setString(1, loginField.getText().trim());
                 preparedStatement.setString(2, passwordField.getText().trim());
-
+                preparedStatement.setBoolean(3,checkBoxSuperUserOnAction());
 
                 ResultSet resultSet = preparedStatement.executeQuery();
 
+
                 if (resultSet.next()) { //Проверка наличия логина и пароля в БД
-                    System.out.println("Succeseful");
+                     agent = new Agent(resultSet.getString("fio_agent"),
+                             resultSet.getBoolean("access"));
+
                     buttonEnterLogin.getScene().getWindow().hide();
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/sample/view/fxml/client.fxml"));
+
+                    if(resultSet.getBoolean("access") == true){
+                        loader.setLocation(getClass().getResource("/sample/view/fxml/managerWindow.fxml"));
+
+                    }
+                    else {
+                        loader.setLocation(getClass().getResource("/sample/view/fxml/client.fxml"));
+                    }
 
                     try {
                         loader.load();
@@ -90,11 +101,11 @@ public class LoginController implements Initializable {
 
                     Parent root = loader.getRoot();
                     Stage stage = new Stage();
+
                     stage.setScene(new Scene(root));
                     stage.setResizable(false);
                     stage.showAndWait();
                 } else {
-//                fieldSuccesoOrFalseLog.setText("Login fail");
                     Alarm.showAlert(Alert.AlertType.ERROR, "Авторизация",
                             "Ошибка!", "Неверный логин или пароль пользователя.");
                     loginField.clear();
@@ -118,13 +129,12 @@ public class LoginController implements Initializable {
 
     }
 
-    public void checkBoxShowPasswordOnAction(ActionEvent actionEvent) {
+    public boolean checkBoxSuperUserOnAction() {
 
-        if (checkBoxShowPassword.isSelected()) {
-            passwordField.setVisible(true);
-
-            passwordField.isVisible();
+        if (checkBoxSuperUser.isSelected()) {
+            return true;
         }
+        return false;
 
     }
 

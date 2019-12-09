@@ -31,7 +31,6 @@ public class PolisController {
     private URL location;
 
 
-
     @FXML
     private TableColumn<Integer, Auto> tableColumnIdAuto;
 
@@ -66,11 +65,6 @@ public class PolisController {
     @FXML
     private Button buttonAddPolis;
 
-    @FXML
-    private Button buttonRefrashAutoTable;
-
-    @FXML
-    private Button buttonRefrashClientTable;
 
     @FXML
     private TextField textfieldIdClient;
@@ -78,12 +72,16 @@ public class PolisController {
     @FXML
     private ComboBox<String> comboBoxTypeInsurance;
 
-    ObservableList<String> insurance = FXCollections.observableArrayList("Обязательное");
+    ObservableList<String> insurance;
     @FXML
     private TextField textfieldIdAgent;
 
     @FXML
-    private TextField textfieldIdAuto;
+    TextField textfieldAutoMarka;
+    @FXML
+    TextField textfieldAutoModel;
+    @FXML
+    TextField textfieldAutoNumber;
 
     @FXML
     private TextField textfieldInsurancePayment;
@@ -95,13 +93,13 @@ public class PolisController {
     private DatePicker textFiledDateIssue;
 
     @FXML
-    private DatePicker textxFiledDateBreakUp;
+    private DatePicker textFiledDateBreakUp;
 
     @FXML
     private TextField textFieldFilterAuto;
 
     @FXML
-    private Button buttonSearchAuto;
+    private TextField textFieldFilterClient;
 
     @FXML
     private Button buttonDataBasePolis;
@@ -109,14 +107,22 @@ public class PolisController {
     @FXML
     private TableView<Auto> tableViewAutoPolis;
 
-    ObservableList<Auto> autos ;
+    ObservableList<Auto> autos;
     ObservableList<Client> clients;
-
-    Client client ;
 
     @FXML
     void initialize() {
-         comboBoxTypeInsurance.setItems(insurance);
+
+        if(LoginController.agent.isAccess() != true){
+            buttonDataBasePolis.setDisable(true);
+        }else {
+            buttonDataBasePolis.setDisable(false);
+        }
+
+        textfieldIdAgent.setText(LoginController.agent.getFio_agent());
+
+        insurance = FXCollections.observableArrayList("Осаго", "Каско");
+        comboBoxTypeInsurance.setItems(insurance);
         autos = FXCollections.observableArrayList();
 
         clients = FXCollections.observableArrayList();
@@ -137,65 +143,96 @@ public class PolisController {
       Инициализация БД в таблице
          */
         tableViewAutoPolis.getItems().clear();
+        tableViewClientsPolis.getItems().clear();
 
-        try (Connection connection = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.DB_USER, DbConnection.DB_PASS) ;
-             PreparedStatement preparedStatement = connection.prepareStatement("select id_авто,marka,model,number_auto from auto") ;) {
+        try (Connection connection = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.DB_USER, DbConnection.DB_PASS);
+//             PreparedStatement preparedStatement = connection.prepareStatement("select id_авто,marka,model,number_auto from auto");
+             PreparedStatement preparedStatement = connection.prepareStatement("select id_авто, marka, model, color, power, volume, number_auto, speed, drive, body from auto");
+             PreparedStatement preparedStatement1 = connection.prepareStatement("select id_client, fio_client, birth_date, number_prav, auto_skill, gender, address, phone, city from client")) {
             ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet2 = preparedStatement1.executeQuery();
 
             while (resultSet.next()) {
 
                 autos.add(new Auto(
-                        resultSet.getInt( "id_авто"),
+                        resultSet.getInt("id_авто"),
                         resultSet.getString("marka"),
                         resultSet.getString("model"),
-                        resultSet.getString("number_auto")
-
+                        resultSet.getString("color"),
+                        resultSet.getString("power"),
+                        resultSet.getString("volume"),
+                        resultSet.getString("number_auto"),
+                        resultSet.getString("speed"),
+                        resultSet.getString("drive"),
+                        resultSet.getString("body")
                 ));
                 tableViewAutoPolis.setItems(autos);
+            }
+
+            while (resultSet2.next()) {
+                clients.add(new Client(
+                        resultSet2.getInt("id_client"),
+                        resultSet2.getString("fio_client"),
+                        resultSet2.getString("birth_date"),
+                        resultSet2.getString("number_prav"),
+                        resultSet2.getString("gender"),
+                        resultSet2.getString("address"),
+                        resultSet2.getString("phone"),
+                        resultSet2.getString("city"),
+                        resultSet2.getString("auto_skill")
+                ));
+                tableViewClientsPolis.setItems(clients);
             }
             connection.close();
             preparedStatement.close();
             resultSet.close();
 
-        } catch ( SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-            /*
-      Инициализация БД в таблице
-         */
 
-        FilteredList<Auto> filteredData = new FilteredList<>(autos,b->true);
+        FilteredList<Client> filteredDataClient = new FilteredList<>(clients, b -> true);
+        textFieldFilterClient.textProperty().addListener((((observable, oldValue, newValue) ->
+                filteredDataClient.setPredicate(clt -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    if (clt.getNumber_prav().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (clt.getFio_clienta().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else return false;
+                }))));
+        SortedList<Client> clientSortedList = new SortedList<>(filteredDataClient);
+        clientSortedList.comparatorProperty().bind(tableViewClientsPolis.comparatorProperty());
+        tableViewClientsPolis.setItems(clientSortedList);
 
-        textFieldFilterAuto.textProperty().addListener(((observable , oldValue , newValue) ->
+
+        FilteredList<Auto> filteredData = new FilteredList<>(autos, b -> true);
+
+        textFieldFilterAuto.textProperty().addListener(((observable, oldValue, newValue) ->
                 filteredData.setPredicate(auto -> {
                     if (newValue == null || newValue.isEmpty()) {
                         return true;
                     }
-
-                    // Compare first name and last name of every person with filter text.
                     String lowerCaseFilter = newValue.toLowerCase();
 
                     if (auto.getNumber().toLowerCase().contains(lowerCaseFilter)) {
                         return true; // Filter matches first name.
                     } else if (auto.getModel().toLowerCase().contains(lowerCaseFilter)) {
                         return true; // Filter matches last name.
-                    }else if (String.valueOf(auto.getNumber()).contains(lowerCaseFilter))
+                    } else if (String.valueOf(auto.getNumber()).contains(lowerCaseFilter))
                         return true;
                     else
                         return false; // Does not match.
                 })));
 
         SortedList<Auto> sortedData = new SortedList<>(filteredData);
-
-        // 4. Bind the SortedList comparator to the TableView comparator.
-        // 	  Otherwise, sorting the TableView would have no effect.
         sortedData.comparatorProperty().bind(tableViewAutoPolis.comparatorProperty());
-
-        // 5. Add sorted (and filtered) data to the table.
         tableViewAutoPolis.setItems(sortedData);
 
     }
-
 
     @FXML
     void buttonDataBasePolisOnAction(ActionEvent event) {
@@ -204,7 +241,7 @@ public class PolisController {
         loader.setLocation(getClass().getResource("/sample/view/fxml/dogovorTable.fxml"));
         try {
             loader.load();
-        } catch ( IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -216,111 +253,87 @@ public class PolisController {
 
     }
 
-//
-//    public void getEditData(Client client) {
-//        this.client = client;
-//        textfieldIdClient.setText(client.getFio_clienta());
-//
-//    }
+    Client client;
+    Auto auto;
+
+    @FXML
+    void buttonSetValuesFieldsOnAction(ActionEvent event) {
+        client = tableViewClientsPolis.getSelectionModel().getSelectedItem();
+        auto = tableViewAutoPolis.getSelectionModel().getSelectedItem();
+        textfieldIdClient.setText(client.getFio_clienta());
+        textfieldAutoMarka.setText(auto.getMarka());
+        textfieldAutoModel.setText(auto.getModel());
+        textfieldAutoNumber.setText(auto.getNumber());
+    }
+
+    int initIdAgent() {
+
+        String nameAgent = textfieldIdAgent.getText();
+        String query2 = "Select id_agent from main_office.public.agent where fio_agent='"+nameAgent+"'";
+        int agentId =0;
+        try (Connection connection = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.DB_USER, DbConnection.DB_PASS);
+             PreparedStatement preparedStatement1 = connection.prepareStatement(query2)
+        ) {
+            ResultSet resultSetAgentId = preparedStatement1.executeQuery();
+            while (resultSetAgentId.next()) {
+                agentId = resultSetAgentId.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return agentId;
+    }
+
     @FXML
     void buttonAddPolisOnAction(ActionEvent event) {
+        int agentId = 0;
+        String nameAgent = textfieldIdAgent.getText();
+//        String query2 = "Select id_agent from main_office.public.agent where fio_agent='"+LoginController.agent.getFio_agent()+"'";
+        String query2 = "Select id_agent from main_office.public.agent where fio_agent=?";
+        String query = "INSERT INTO dogovor (dateofissue, breakupdate, id_agent, id_client, insurance_type, insurance_payment, id_auto, pay,branch) VALUES (?,?,?,?,?,?,?,?,?)";
+        try (Connection connection = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.DB_USER, DbConnection.DB_PASS);
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+             PreparedStatement preparedStatement1 = connection.prepareStatement(query2)
 
-
-        try (Connection connection = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.DB_USER, DbConnection.DB_PASS) ;
-             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO dogovor (dateofissue, breakupdate, id_agent, id_client, insurance_type, insurance_payment, id_auto, pay) VALUES (?,?,?,?,?,?,?,?)")) {
+        ) {
+            preparedStatement1.setString(1,LoginController.agent.getFio_agent());
+            ResultSet resultSetAgentId = preparedStatement1.executeQuery();
+            if (resultSetAgentId.next()) {
+                agentId = resultSetAgentId.getInt(1);
+            }
 
             preparedStatement.setString(1, textFiledDateIssue.getEditor().getText());
-            preparedStatement.setString(2, textxFiledDateBreakUp.getEditor().getText());
-            preparedStatement.setInt(3, Integer.parseInt(textfieldIdAgent.getText().trim()) );
-            preparedStatement.setInt(4, Integer.parseInt(textfieldIdClient.getText().trim()));
+            preparedStatement.setString(2, textFiledDateBreakUp.getEditor().getText());
+            preparedStatement.setInt(3, agentId);
+            preparedStatement.setInt(4, client.getId_clienta());
             preparedStatement.setString(5, comboBoxTypeInsurance.getValue());
-            preparedStatement.setString(6, textfieldInsurancePayment.getText());
-            preparedStatement.setInt(7, Integer.parseInt(textfieldIdAuto.getText().trim()) );
-            preparedStatement.setString(8, textfieldPay.getText());
+            preparedStatement.setInt(6, Integer.parseInt(textfieldInsurancePayment.getText()));
+            preparedStatement.setInt(7, auto.getId());
+            preparedStatement.setInt(8, Integer.parseInt(textfieldPay.getText()));
+            preparedStatement.setString(9, "H");
 
             preparedStatement.executeUpdate();
 
-     clearFieldsAuto();
+            clearFieldsAuto();
             Alarm.showAlert(Alert.AlertType.INFORMATION, "Оформление",
-                    "Успешно!","Полис оформлен.");
-        } catch ( SQLException eq) {
+                    "Успешно!", "Полис оформлен.");
+        } catch (SQLException eq) {
             Alarm.showAlert(Alert.AlertType.ERROR, "Оформление",
                     "Ошибка!", "Подробности: " + eq + ".");
         }
-        clearFieldsAuto();
     }
 
 
     private void clearFieldsAuto() {
         textFiledDateIssue.getEditor().clear();
-        textxFiledDateBreakUp.getEditor().clear();
+        textFiledDateBreakUp.getEditor().clear();
         textfieldIdAgent.clear();
         textfieldIdClient.clear();
-        comboBoxTypeInsurance.getItems().clear();
         textfieldInsurancePayment.clear();
-        textfieldIdAuto.clear();
+        textfieldAutoModel.clear();
+        textfieldAutoMarka.clear();
+        textfieldAutoNumber.clear();
         textfieldPay.clear();
     }
-
-    @FXML
-    void buttonRefrashAutoTableOnAction(ActionEvent event) {
-
-        tableViewAutoPolis.getItems().clear();
-
-        try (Connection connection = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.DB_USER, DbConnection.DB_PASS) ;
-             PreparedStatement preparedStatement = connection.prepareStatement("select id_авто,marka,model,number_auto from auto") ;) {
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-
-                autos.add(new Auto(
-                        resultSet.getInt( "id_авто"),
-                        resultSet.getString("marka"),
-                        resultSet.getString("model"),
-                        resultSet.getString("number_auto")
-
-                ));
-                tableViewAutoPolis.setItems(autos);
-            }
-            connection.close();
-            preparedStatement.close();
-            resultSet.close();
-
-        } catch ( SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void buttonRefrashClientTableOnAction(ActionEvent event) {
-        tableViewClientsPolis.getItems().clear();
-
-        try (Connection connection = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.DB_USER, DbConnection.DB_PASS) ;
-             PreparedStatement preparedStatement = connection.prepareStatement("select id_client,fio_client,birth_date,number_prav,gender from client") ;) {
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-
-                clients.add(new Client(
-                        resultSet.getInt( "id_client"),
-                        resultSet.getString("fio_client"),
-                        resultSet.getString("birth_Date"),
-                        resultSet.getString("number_prav"),
-                        resultSet.getString("gender")
-
-                ));
-                tableViewClientsPolis.setItems(clients);
-            }
-            connection.close();
-            preparedStatement.close();
-            resultSet.close();
-
-        } catch ( SQLException e) {
-            e.printStackTrace();
-        }
-
-        client = tableViewClientsPolis.getSelectionModel().getSelectedItem();
-    }
-
 
 }
